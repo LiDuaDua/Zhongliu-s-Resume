@@ -1,3 +1,6 @@
+This amazing resume generator was created by [Joyee Cheung](https://github.com/joyeecheung) 
+
+
 ## My Personal Resume
 
 Read resume data from a JSON file and generate a static web page. GitHub Pages support included.
@@ -26,6 +29,4 @@ Written with Gulp, Less, and Jade.
 ## LICENSE
 
 (MIT License)
-
-Copyright (c) 2016 Zhang Longde
 
