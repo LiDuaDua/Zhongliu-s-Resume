@@ -1,94 +1,106 @@
-var gulp = require('gulp')
-var sass = require('gulp-sass')
-var autoprefixer = require('gulp-autoprefixer')
-var jade = require('gulp-jade')
-var copy = require('gulp-copy')
-var rimrafPromise = require('rimraf-promise')
-var ghPages = require('gulp-gh-pages')
-var fs = require('fs')
-var connect = require('gulp-connect')
+var gulp = require('gulp');
+var plugins = require('gulp-load-plugins')();
 
-gulp.task('resume-sass', function () {
-  gulp.src('src/scss/resume.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 4 versions'],
-      cascade: false
-    }))
-    .pipe(gulp.dest('dist/css/'))
-    .pipe(connect.reload())
-})
+var path = require('path');
+var gls = require('gulp-live-server');
 
-gulp.task('icon-sass', function () {
-  gulp.src('src/scss/iconfont.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 4 versions'],
-      cascade: false
-    }))
-    .pipe(gulp.dest('dist/iconfont/'))
-    .pipe(connect.reload())
-})
+var server = gls.static('dist', 8000);
 
-gulp.task('sass:watch', function () {
-  gulp.watch('./src/scss/resume.scss', ['resume-sass'])
-  gulp.watch('./src/scss/iconfont.scss', ['icon-sass'])
-  gulp.watch('./src/scss/components/*.scss', ['resume-sass'])
-})
-
-gulp.task('json2jade', function () {
-  var info = JSON.parse(fs.readFileSync('./info.json', 'utf-8'))
-  var locals = highlight(info)
-  gulp.src('./src/jade/index.jade')
-    .pipe(jade({
-      locals: locals
-    }))
-    .pipe(gulp.dest('./dist/'))
-    .pipe(connect.reload())
-})
-
-gulp.task('json2jade:watch', function () {
-  gulp.watch('./info.json', ['json2jade'])
-})
-
-function src2dist(dir) {
-  return gulp.src(`./src/${dir}/*.*`).pipe(gulp.dest(`./dist/${dir}/`))
+/**************** Utility **********************/
+function highlight(str) {
+  return str.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`(.+?)`/g, '<strong>$1</strong>');
 }
 
-function highlight(locals) {
-  var locals = JSON.stringify(locals)
-  var re = /`(.+?)`/g
-  locals = locals.replace(re, '<strong>$1</strong>')
-  return JSON.parse(locals)
+/******************* Jade to html ***********/
+function getLocals() {
+  var resumeData = require('./resume.json');
+  var localePath = './i18n/' + resumeData.data_lang + '/dict.js';
+  var locals = require(localePath);
+
+  // remove cache
+  delete require.cache[require.resolve('./resume.json')];
+  delete require.cache[require.resolve(localePath)];
+
+  // integrate the context
+  for (var item in resumeData) {
+    locals[item] = resumeData[item];
+  }
+
+  locals.highlight = highlight;
+
+  return locals;
 }
 
-gulp.task('copy', () => {
-  src2dist('iconfont')
-  src2dist('img')
-  src2dist('pdf')
-  gulp.src('./CNAME').pipe(gulp.dest('./dist'))
-})
+gulp.task('jade', function() {
+  return gulp.src('./src/jade/index.jade')
+    .pipe(plugins.jade({ locals: getLocals() }))
+    .pipe(gulp.dest('./dist/'));
+});
 
-gulp.task('clean', () => {
-  rimrafPromise('./dist/')
-})
+/************* less to css  ********************/
+var lessPath = [path.join(__dirname, 'src', 'less', 'includes'),
+                path.join(__dirname, 'src', 'less', 'components')];
 
-gulp.task('deploy', function () {
+function less2css(srcPath, destPath, debug) {
+  if(!debug) {
+    return gulp.src(srcPath)
+      .pipe(plugins.less({ paths: lessPath }))
+      .pipe(plugins.minifyCss({ compatibility: 'ie9' }))
+      .pipe(gulp.dest(destPath));
+  } else {
+    return gulp.src(srcPath)
+      .pipe(plugins.sourcemaps.init())
+      .pipe(plugins.less({ paths: lessPath }))
+      .pipe(plugins.sourcemaps.write())
+      .pipe(gulp.dest(destPath));
+  }
+}
+
+gulp.task('less', function() {
+  less2css('./src/less/questions.less', './dist/questions/');
+  less2css('./src/less/index.less', './dist/');
+});
+
+gulp.task('less-debug', function() {
+  less2css('./src/less/questions.less', './dist/questions/', true);
+  less2css('./src/less/index.less', './dist/', true);
+});
+
+/************** Static assets **************/
+gulp.task('static', function() {
+  return gulp.src('./static/**/*', { base: 'static' })
+    .pipe(gulp.dest('./dist/static/'));
+});
+
+/****************** Watch ****************/
+gulp.task('watch', ['server'], function() {
+  gulp.watch(['./src/**/*.jade', './resume.json', './i18n/**/*.js'],
+             ['jade']);
+  gulp.watch('./static/**/*', ['static']);
+  gulp.watch('./src/**/*.less', ['less-debug']);
+  gulp.watch('./dist/**/*', function() {
+    server.notify.apply(server, arguments);
+  });
+});
+
+/****************** Build ****************/
+gulp.task('build', ['jade', 'less-debug', 'static']);
+gulp.task('build-for-deploy', ['jade', 'less', 'static']);
+
+/****************** Server ****************/
+gulp.task('serve', function () {
+  server.start();
+});
+
+gulp.task('server', ['build', 'serve']);
+gulp.task('preview', ['build-for-deploy', 'serve']);
+
+/****************** Deploy ****************/
+gulp.task('deploy', ['build-for-deploy'], function() {
   return gulp.src('./dist/**/*')
-  .pipe(ghPages({
-    remoteUrl: 'git@github.com:Lxxyx/lxxyx.github.io.git',
-    branch: 'master'
-  }))
-})
+    .pipe(plugins.ghPages());
+});
 
-gulp.task('webserver', function () {
-    connect.server({
-        root: './dist',
-        livereload: true,
-        port:9000
-    })
-})
-
-gulp.task('dev', ['default', 'json2jade:watch', 'sass:watch', 'webserver'])
-
-gulp.task('default', ['icon-sass', 'resume-sass', 'json2jade', 'copy'])
+/****************** Default ****************/
+gulp.task('default', ['server', 'watch']);

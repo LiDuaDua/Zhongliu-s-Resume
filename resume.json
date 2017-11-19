@@ -1,0 +1,219 @@
+{
+    "data_lang": "zh-CN",
+    "ga_id": "UA-63818301-2",
+    "resume_title": "黎中流 个人简历",
+    "name": "黎中流",
+    "repo": "",
+    "job_description": ["机器学习工程师/软件工程师"],
+    "contact": {
+        "phone": "(1)2246164730",
+        "email": "bestlzl1994@gmail.com",
+        "wechat": {
+            "id": "liduadua",
+            "qrcode": "static/we.png"
+        },
+        "github": {
+            "id": "liduadua"
+        },
+        "sinaweibo": {
+            "id": "@liduadua",
+            "url": "liduadua"
+        }
+    },
+    "links": [
+        {
+            "type": "repo",
+            "url": "https://github.com/liduadua"
+
+        },
+        {
+            "type": "pdf",
+            "url": "./static/LiDuaDua.pdf"
+
+        },
+        {
+            "type": "zhihu",
+            "url": "https://www.zhihu.com/people/liduadua/activities"
+        },
+        {
+            "type": "doubanbook",
+            "url": "https://www.douban.com/people/128452322/"
+        }
+    ],
+    "education": [
+        {
+            "type": "undergraduate",
+            "name": "北京航空航天大学",
+            "major": "信息工程",
+            "start": "2012",
+            "end": "2016",
+            "honor": [
+                "2013 - 2014 学习优秀二等奖",
+                "GPA: `87/100 &nbsp&nbsp Top15%`"
+            ]  
+        },
+        {
+            "type": "graduate",
+            "name": "美国西北大学",
+            "major": "电子与计算机工程",
+            "start": "2016",
+            "end": "2018",
+            "honor": [
+                "GPA : `3.92/4.0`"
+            ]  
+        }
+    ],
+    "language": [
+        {
+            "type": "english",
+            "certificate": [
+                {
+                    "type": "Toefl",
+                    "full": "120",
+                    "score": "96"
+                },
+                {
+                    "type": "GRE",
+                    "full": "340",
+                    "score": "324"
+                }
+            ],
+            "description": [
+                "能够流畅得进行听说读写"
+            ]
+        }
+    ],
+    "experience": [
+        {
+            "type": "project",
+            "techtype": "personal",
+            "project_type": "ml",
+            "place": "机器学习项目",
+            "start": "2017.04",
+            "end": "2017.06",
+            "name": "图像风格识别",
+            "description": [
+                "对三种风格的图片(印象/现实/抽象主义)收集共1200张，并编写 `python` 脚本对图像进行预处理以及类别标记",
+                "使用 `TensorFlow` 框架建立卷积神经网络模型对训练图片集进行训练",
+                "基于训练测试结果对模型进行参数调节，所得模型对三种风格的识别准确率达到 `87%`"
+            ],
+            "stack": ["Python", "TensorFlow","AWS"]
+        },
+        {
+            "type": "project",
+            "techtype": "Machine Learning",
+            "project_type": "ml",
+            "place": "机器学习项目",
+            "start": "2017.04",
+            "end": "2017.05",
+            "name": "图像风格迁移",
+            "description": [
+                "使用 `VGG深度网络` 实现分别对图片的风格和内容的提取",
+                "实现多次迭代 `图像重建算法`，将一幅图片的风格与另一张图片的内容结合，从而产成风格迁移效果"
+            ],
+            "stack": ["Python", "TensorFlow","AWS"]
+        },
+        {
+            "type": "project",
+            "techtype": "机器学习",
+            "project_type": "ml",
+            "place": "机器学习项目",
+            "start": "2016.01",
+            "end": "2016.06",
+            "name": "基于SVM的掺杂光谱检测",
+            "description": [
+                "编写脚本对原始光谱进行降噪、基波移除等预处理",
+                "实现 `PCA、PLS-DA` 算法对光谱主特征进行提取",
+                "建立 `SVM多分类模型`，对三种掺杂光谱的检测准确率达到82%"
+            ],
+            "stack": ["PCA","PLS-DA", "SVM"]
+        },
+        {
+            "type": "project",
+            "techtype": "Machine Learning",
+            "project_type": "web",
+            "place": "Web 项目",
+            "start": "2014.03",
+            "end": "2014.06",
+            "name": " 基于视觉方法的疲劳组检测项目",
+            "description": [
+                "搭建了一个由红外单摄像头为核心的计算机视觉系统",
+                "利用OpenCV，实时提取眼部区域图像并计算 `Perclose` 值",
+                "基于Perclose值对疲劳度进行实时预测"
+            ],
+            "stack": ["C", "OpenCV"]
+        },
+        {
+            "type": "project",
+            "techtype": "web",
+            "project_type": "web",
+            "place": "Web 项目",
+            "start": "2017.02",
+            "end": "2017.03",
+            "name": "Web: RWB",
+            "description": [
+                "创建Oracle数据库，将超过1400万联邦选举数据与地理信息聚合并导入数据库",
+                "编写perl后台程序，实现逻辑层以及数据库接口",
+                "搭建用户界面，导入谷歌地图，并实时显示用户附近的选举信息"
+            ],
+            "stack": []
+        },
+        {
+            "type": "project",
+            "techtype": "机器学习",
+            "project_type": "game",
+            "place": "游戏开发",
+            "start": "2016.10",
+            "end": "2016.12",
+            "name": "Panda Escape: 2D探索游戏",
+            "description": [
+                "设计并优化了游戏机制和游戏控制",
+                "建立了机器人的行为树模型，并实现A*算法寻找最优路径",
+                "根据情景对游戏添加了 `Graph`/`Sound Effect`"
+            ],
+            "stack": ["Unity","C#"]
+        }
+    ],
+    "skills": [
+        {
+            "type": "ml",
+            "item": [
+                {
+                    "summary": "机器学习算法",
+                    "description": [
+                        "理解 `SVM`、`贝叶斯`、`K邻`、`决策树`、`神经网络` 等机器学习算法",
+                        "在项目经历中，实现过SVM(光谱分类、手写字符识别)、决策树、神经网络(图像风格识别)等分类模型"
+                    ]
+                },
+                {
+                    "summary": "框架与编程语言",
+                    "description": [
+                        "能够熟练使用python编程语言",
+                        "熟悉`numpy`、`scikit-learn`等常用python工具包",
+                        "了解 `TensorFlow` 框架，并在多个项目中用其搭建神经网络模型（`CNN/RNN`）"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "web",
+            "item": [
+                {
+                    "summary": "web  前端",
+                    "description": [
+                        "有前端开发经验，能够用 `HTML`/`CSS`/`Javascript` 实现简单的UI",
+                        "熟悉 `JavaScript`, 有 `AngularJS` 使用经验"
+                    ]
+                },
+                {
+                    "summary": "web 后端",
+                    "description": [
+                        "熟练使用`Java，python`, 熟悉 `MVC` 和 `RESTful` 框架",
+                        "有`Spring` 使用经验，理解 `DI`、`Ioc`、`AOP`等基本概念",
+                        "熟悉 `oracle` `mysql` 数据库和数据库 `CRUD` 操作"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,27 +1,35 @@
 {
-  "name": "resume-generator",
+  "name": "joyee-resume",
   "version": "1.0.0",
-  "description": "Resume generator by Gulp + Sass",
+  "description": "Read resume data from a JSON file and generate a static web page.",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp clean && gulp",
-    "dev": "gulp dev",
-    "deploy": "npm run start && gulp deploy && git add -A && git commit -m 'update resume' && git push origin master"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Lxxyx",
+  "author": "Joyee Cheung <joyeec9h3@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-connect": "^5.0.0",
-    "gulp-copy": "^0.0.2",
-    "gulp-jade": "^1.1.0",
-    "gulp-sass": "^2.2.0",
-    "jade": "^1.11.0",
-    "rimraf-promise": "^2.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joyeecheung/resume.git"
   },
+  "dependencies": {},
   "devDependencies": {
-    "gulp-clean": "^0.3.2",
-    "gulp-gh-pages": "^0.5.4"
-  }
+    "gulp": "^3.9.0",
+    "gulp-gh-pages": "^0.5.2",
+    "gulp-jade": "^1.0.0",
+    "gulp-less": "^3.0.0",
+    "gulp-live-server": "0.0.23",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-minify-css": "^1.1.6",
+    "gulp-sourcemaps": "^1.5.2",
+    "highlight.js": "^8.6.0",
+    "jade": "^1.10.0"
+  },
+  "bugs": {
+    "url": "https://github.com/joyeecheung/resume/issues"
+  },
+  "homepage": "https://github.com/joyeecheung/resume",
+  "keywords": [
+    "resume"
+  ]
 }

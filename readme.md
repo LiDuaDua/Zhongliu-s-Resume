@@ -1,15 +1,31 @@
-# Introduction
+## My Personal Resume
 
-简历为仿写，原简历页面地址: [张秋怡 - 个人简历](https://joyeecheung.github.io/resume/) 【原主人已删除】
+Read resume data from a JSON file and generate a static web page. GitHub Pages support included.
 
-简历基于Gulp+Scss+Jade。  
-访问地址：[Lxxyx的简历](https://lxxyx.github.io)
+Written with Gulp, Less, and Jade.
 
-### 运行方式：
-替换info.json的内容，运行`gulp`即可。  
-生成内容可在dist文件夹查看。
+## Build
 
-需要自动部署的，运行`gulp deploy`即可，需要在gulpfile中更改为你的地址（！会抹去你github pages内容，慎用！）
+1. Run `npm install` to install the dependencies.
+2. Fill your resume data in `resume.json`.
+3. Run `gulp build` to generate the static web page(`dist/index.html`).
+4. Run `gulp server` and visit `http://localhost:8000` if you want to see it hosted locally(make sure the port 8000 is not taken).
 
-### 自定义域名
-修改CNAME文件，替换为你的域名即可
+## Deploy to GitHub Pages
+
+1. Set up the SSH git remote `origin` for the project.
+2. After building the web page, run `gulp deploy`.
+3. Everything under `dist` will be pushed to the remote repo's `gh-pages` branch.
+
+## Develop
+
+1. Make sure port 35729(for livereload) and 8000(for the local server) are available.
+2. Run `gulp`, then visit `http://localhost:8000`.
+3. Start development!
+
+## LICENSE
+
+(MIT License)
+
+Copyright (c) 2016 Zhang Longde
+
